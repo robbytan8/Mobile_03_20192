@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Mobile_03</string>
+    <string name="text_nrp">NRP (e.g. 1772999)</string>
+    <string name="text_name">Your Name</string>
+    <string name="text_address">Your Address</string>
+    <string name="text_email">Your Email (e.g. someone@email.com)</string>
+    <string name="text_disability">Disability</string>
+    <string name="text_male">Male</string>
+    <string name="text_female">Female</string>
+    <string name="action_submit">Submit</string>
+    <string name="text_item1">Item 1</string>
+    <string name="text_item2">Item 2</string>
+</resources>
