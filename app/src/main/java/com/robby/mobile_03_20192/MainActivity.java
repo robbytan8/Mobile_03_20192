@@ -4,48 +4,24 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.ScrollView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.robby.mobile_03_20192.databinding.ActivityMainBinding;
 import com.robby.mobile_03_20192.entity.Department;
 
 import java.util.ArrayList;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * @author Robby Tan
  */
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.sv_root)
-    ScrollView svRoot;
-    @BindView(R.id.et_nrp)
-    EditText txtNrp;
-    @BindView(R.id.et_name)
-    EditText txtName;
-    @BindView(R.id.et_address)
-    EditText txtAddress;
-    @BindView(R.id.et_email)
-    EditText txtEmail;
-    @BindView(R.id.rb_male)
-    RadioButton rbMale;
-    @BindView(R.id.rb_female)
-    RadioButton rbFemale;
-    @BindView(R.id.cb_disability)
-    CheckBox cbDisability;
-    @BindView(R.id.spin_departments)
-    Spinner spinDepartments;
+    private ActivityMainBinding binding;
 
     private ArrayList<Department> departments;
     private ArrayAdapter<Department> departmentArrayAdapter;
@@ -53,21 +29,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        spinDepartments.setAdapter(getDepartmentArrayAdapter());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
+        binding.spinDepartments.setAdapter(getDepartmentArrayAdapter());
+        binding.btnSubmit.setOnClickListener(v -> {
+            this.submitAction();
+        });
     }
 
-    @OnClick(R.id.btn_submit)
     public void submitAction() {
-        String nrp = txtNrp.getText().toString();
-        String name = txtName.getText().toString();
-        String address = txtAddress.getText().toString();
-        String email = txtEmail.getText().toString();
-        boolean disability = cbDisability.isChecked();
-        String gender = rbMale.isSelected() ? rbMale.getText().toString() : rbFemale.getText().toString();
-        Department department = (Department) spinDepartments.getSelectedItem();
-        Snackbar.make(svRoot, String.format("%s(%s) | Address: %s | Email: %s | Gender: %s | Disability: %b | Department: %s%n", name, nrp, address, email, gender, disability, department), Snackbar.LENGTH_LONG).show();
+        String nrp = binding.etNrp.getText().toString();
+        String name = binding.etName.getText().toString();
+        String address = binding.etAddress.getText().toString();
+        String email = binding.etEmail.getText().toString();
+        boolean disability = binding.cbDisability.isChecked();
+        String gender = binding.rbMale.isSelected() ? binding.rbMale.getText().toString() :
+                binding.rbFemale.getText().toString();
+        Department department = (Department) binding.spinDepartments.getSelectedItem();
+        Snackbar.make(binding.svRoot, String.format("%s(%s) | Address: %s | Email: %s | Gender: %s | Disability: %b | Department: %s%n", name, nrp, address, email, gender, disability, department), Snackbar.LENGTH_LONG).show();
     }
 
     @Override
