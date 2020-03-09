@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Department> departments;
     private ArrayAdapter<Department> departmentArrayAdapter;
+    private ArrayAdapter<CharSequence> scholarshipArrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
         binding.spinDepartments.setAdapter(getDepartmentArrayAdapter());
+        binding.spinScholarship.setAdapter(getScholarshipArrayAdapter());
         binding.btnSubmit.setOnClickListener(v -> {
             this.submitAction();
         });
@@ -85,5 +87,15 @@ public class MainActivity extends AppCompatActivity {
             departmentArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, getDepartments());
         }
         return departmentArrayAdapter;
+    }
+
+    public ArrayAdapter getScholarshipArrayAdapter() {
+        if (scholarshipArrayAdapter == null) {
+            scholarshipArrayAdapter = ArrayAdapter.createFromResource(this,
+                    R.array.scholarships_array,
+                    android.R.layout.simple_spinner_item);
+            scholarshipArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        }
+        return scholarshipArrayAdapter;
     }
 }

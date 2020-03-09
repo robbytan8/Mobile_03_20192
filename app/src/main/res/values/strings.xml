@@ -1,4 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="scholarships_array">
+        <item>Scholarship 1</item>
+        <item>Scholarship 2</item>
+        <item>Scholarship 3</item>
+        <item>Scholarship 4</item>
+    </string-array>
     <string name="app_name">Mobile_03</string>
     <string name="text_nrp">NRP (e.g. 1772999)</string>
     <string name="text_name">Your Name</string>
